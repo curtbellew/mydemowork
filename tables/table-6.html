@@ -1,8 +1,59 @@
-<html><head><title>Table Demo</title>
+<html><head><title>Table Demo 6: CSS Table with ARIA</title>
+<style>
+.row {
+    white-space: nowrap;
+    border-bottom: 1px solid black;
+}
+.cell {
+    display: inline-block;
+    white-space: normal;
+    border-right:1px solid black;
+    width:115px;
+}
+.splitter {
+	display: inline-block;
+    white-space: normal;
+}
+.headerDiv {
+	font-weight:bold;
+}
+</style>
 </head><body>
-<h1>Table Demo 6: ARIA</h1>
+<h1>Table Demo 6: CSS Table with ARIA</h1>
 <div id="demo2table">Student Progress</div>
-<table aria-labelledby="demo2table" border="1">
+
+<div role="grid" aria-labelledby="gridlabel">
+	<div class="headerDiv" role="row">
+		<div id="c1" class="cell row" role="columnheader">Student Name</div>
+		<div id="c2" class="cell row" role="columnheader">Biology</div>
+		<div id="c3" class="cell row" role="columnheader">Chemistry</div>
+		<div id="c4" class="cell row" role="columnheader">Physics</div>
+		<div id="c5" class="cell row" role="columnheader">History</div>
+	</div>
+	<div role="row" class="row" aria-owns="r1">
+		<div class="cell" role="rowheader">John Doe</div>
+		<div class="cell" role="gridcell">A</div>
+		<div class="cell" role="gridcell">A+</div>
+		<div class="cell" role="gridcell">B</div>
+		<div class="cell" role="gridcell">B</div>
+	</div>
+	<div role="row" class="row" aria-owns="r2">
+		<div class="cell" role="rowheader">Miriam Luther</div>
+		<div class="cell" role="gridcell">A</div>
+		<div class="cell" role="gridcell">A</div>
+		<div class="cell" role="gridcell">C</div>
+		<div class="cell" role="gridcell">B</div>
+	</div>
+	<div role="row" class="row" aria-owns="r3">
+		<div class="cell" role="rowheader">Arthur Long</div>
+		<div class="cell" role="gridcell">A</div>
+		<div class="cell" role="gridcell">A</div>
+		<div class="cell" role="gridcell">C</div>
+		<div class="cell" role="gridcell">B</div>
+	</div>
+</div>
+
+<!--table aria-labelledby="demo2table" border="1">
     <tr>
         <th role="columnheader">Student Name</th>
         <th role="columnheader">Biology</th>
@@ -31,7 +82,7 @@
 		<td>C</td>
 		<td>B</td>
     </tr>
-</table>
+</table-->
 <div style="position:absolute;bottom:10px">
 <span><a href="table-1.html">table 1</a></span>
 <span><a href="table-2.html">table 2</a></span>
