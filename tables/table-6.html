@@ -18,34 +18,38 @@
 	font-weight:bold;
 }
 </style>
-</head><body>
+<link type="text/css" rel="stylesheet" href="chrome-extension://dagdlcijhfbmgkjokkjicnnfimlebcll/style.css"><script type="text/javascript" charset="utf-8" src="chrome-extension://dagdlcijhfbmgkjokkjicnnfimlebcll/page_context.js"></script></head><body screen_capture_injected="true">
 <h1>Table Demo 6: CSS Table with ARIA</h1>
 <div id="demo2table">Student Progress</div>
 
-<div role="grid" aria-labelledby="demo2table">
+<div role="grid" aria-labelledby="demo2table" style="
+    width: fit-content;
+    border-top: solid black 1px;
+    border-left: solid black 1px;
+">
 	<div class="headerDiv" role="row">
-		<div id="c1" class="cell row" role="columnheader">Student Name</div>
-		<div id="c2" class="cell row" role="columnheader">Biology</div>
-		<div id="c3" class="cell row" role="columnheader">Chemistry</div>
-		<div id="c4" class="cell row" role="columnheader">Physics</div>
-		<div id="c5" class="cell row" role="columnheader">History</div>
+		<div id="c1" class="cell" role="columnheader">Student Name</div>
+		<div id="c2" class="cell" role="columnheader">Biology</div>
+		<div id="c3" class="cell" role="columnheader">Chemistry</div>
+		<div id="c4" class="cell" role="columnheader">Physics</div>
+		<div id="c5" class="cell" role="columnheader">History</div>
 	</div>
 	<div role="row" class="row" aria-owns="r1">
-		<div class="cell" role="rowheader">John Doe</div>
+		<div class="cell" role="rowheader" data-oagth="row header: John Doe">John Doe</div>
 		<div class="cell" role="gridcell">A</div>
 		<div class="cell" role="gridcell">A+</div>
 		<div class="cell" role="gridcell">B</div>
 		<div class="cell" role="gridcell">B</div>
 	</div>
 	<div role="row" class="row" aria-owns="r2">
-		<div class="cell" role="rowheader">Miriam Luther</div>
+		<div class="cell" role="rowheader" data-oagth="row header: Miriam Luther">Miriam Luther</div>
 		<div class="cell" role="gridcell">A</div>
 		<div class="cell" role="gridcell">A</div>
 		<div class="cell" role="gridcell">C</div>
 		<div class="cell" role="gridcell">B</div>
 	</div>
 	<div role="row" class="row" aria-owns="r3">
-		<div class="cell" role="rowheader">Arthur Long</div>
+		<div class="cell" role="rowheader" data-oagth="row header: Arthur Long">Arthur Long</div>
 		<div class="cell" role="gridcell">A</div>
 		<div class="cell" role="gridcell">A</div>
 		<div class="cell" role="gridcell">C</div>
@@ -95,4 +99,5 @@
 <span><a href="table-9.html">table 9</a></span>
 <span><a href="table-10.html">table 10</a></span>
 </div>
+
 </body></html>
