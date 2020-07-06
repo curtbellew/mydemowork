@@ -1,0 +1,64 @@
+<html><head><title>Table Demo</title>
+<style>
+.mask {
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    opacity: 0.5;
+
+    filter: blur(10px);
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='svgMask'><feGaussianBlur stdDeviation='10' /></filter></svg>#svgMask");
+}
+</style>
+</head><body>
+<h1>Table Demo 1</h1>
+<div class="mask" id="demo2table">Student Progress</div>
+<table aria-labelledby="demo2table" border="1">
+    <tr>
+        <th class="mask"  role="columnheader">Student Name</th>
+        <th class="mask"  role="columnheader">Biology</th>
+        <th class="mask"  role="columnheader">Chemistry</th>
+        <th class="mask"  role="columnheader">Physics</th>
+        <th class="mask"  role="columnheader">History</th>
+    </tr>
+    <tr>
+        <th class="mask" role="rowheader">John Doe</th>
+        <td>A</td>
+        <td>A+</td>
+        <td>B</td>
+        <td>B</td>
+    </tr>
+    <tr>
+		<th class="mask"  role="rowheader">Miriam Luther</th>
+		<td>A</td>
+		<td>A</td>
+		<td>C</td>
+		<td>B</td>
+    </tr>
+    <tr>
+		<th class="mask"  role="rowheader">Arthur Long</th>
+		<td>A</td>
+		<td>A</td>
+		<td>C</td>
+		<td>B</td>
+    </tr>
+</table>
+<div style="position:absolute;bottom:10px">
+<span><a style="font-weight: bolder;border: 3px solid black;background-color: black;color: white;" href="table-1.html">table 1</a></span>
+<span><a href="table-2.html">table 2</a></span>
+<span><a href="table-3.html">table 3</a></span>
+<span><a href="table-4.html">table 4</a></span>
+<span><a href="table-5.html">table 5</a></span>
+<span><a href="table-6.html">table 6</a></span>
+<span><a href="table-7.html">table 7</a></span>
+<span><a href="table-8.html">table 8</a></span>
+<span><a href="table-9.html">table 9</a></span>
+<span><a href="table-10.html">table 10</a></span>
+</div>
+</body></html>
