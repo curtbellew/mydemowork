@@ -1,37 +1,62 @@
-<html><head><title>Table Demo</title>
-</head><body>
-<h1>Table Demo 6: ARIA</h1>
+<html><head><title>Table Demo 6: CSS Table with ARIA</title>
+<style>
+.row {
+    white-space: nowrap;
+    border-bottom: 1px solid black;
+}
+.cell {
+    display: inline-block;
+    white-space: normal;
+    border-right:1px solid black;
+    width:115px;
+}
+.splitter {
+	display: inline-block;
+    white-space: normal;
+}
+.headerDiv {
+	font-weight:bold;
+}
+</style>
+<link type="text/css" rel="stylesheet" href="chrome-extension://dagdlcijhfbmgkjokkjicnnfimlebcll/style.css"><script type="text/javascript" charset="utf-8" src="chrome-extension://dagdlcijhfbmgkjokkjicnnfimlebcll/page_context.js"></script></head><body screen_capture_injected="true">
+<h1>Table Demo 6: CSS Table with ARIA</h1>
 <div id="demo2table">Student Progress</div>
-<table aria-labelledby="demo2table" border="1">
-    <tr>
-        <th role="columnheader">Student Name</th>
-        <th role="columnheader">Biology</th>
-        <th role="columnheader">Chemistry</th>
-        <th role="columnheader">Physics</th>
-        <th role="columnheader">History</th>
-    </tr>
-    <tr>
-        <td role="rowheader">John Doe</td>
-        <td>A</td>
-        <td>A+</td>
-        <td>B</td>
-        <td>B</td>
-    </tr>
-    <tr>
-		<td role="rowheader">Miriam Luther</td>
-		<td>A</td>
-		<td>A</td>
-		<td>C</td>
-		<td>B</td>
-    </tr>
-    <tr>
-		<td role="rowheader">Arthur Long</td>
-		<td>A</td>
-		<td>A</td>
-		<td>C</td>
-		<td>B</td>
-    </tr>
-</table>
+
+<div role="grid" aria-labelledby="demo2table" style="
+    width: fit-content;
+    border-top: solid black 1px;
+    border-left: solid black 1px;
+">
+	<div class="headerDiv row" role="row">
+		<div id="c1" class="cell" role="columnheader">Student Name</div>
+		<div id="c2" class="cell" role="columnheader">Biology</div>
+		<div id="c3" class="cell" role="columnheader">Chemistry</div>
+		<div id="c4" class="cell" role="columnheader">Physics</div>
+		<div id="c5" class="cell" role="columnheader">History</div>
+	</div>
+	<div role="row" class="row">
+		<div class="cell" role="rowheader">John Doe</div>
+		<div class="cell" role="gridcell">A</div>
+		<div class="cell" role="gridcell">A+</div>
+		<div class="cell" role="gridcell">B</div>
+		<div class="cell" role="gridcell">B</div>
+	</div>
+	<div role="row" class="row">
+		<div class="cell" role="rowheader">Miriam Luther</div>
+		<div class="cell" role="gridcell">A</div>
+		<div class="cell" role="gridcell">A</div>
+		<div class="cell" role="gridcell">C</div>
+		<div class="cell" role="gridcell">B</div>
+	</div>
+	<div role="row" class="row">
+		<div class="cell" role="rowheader">Arthur Long</div>
+		<div class="cell" role="gridcell">A</div>
+		<div class="cell" role="gridcell">A</div>
+		<div class="cell" role="gridcell">C</div>
+		<div class="cell" role="gridcell">B</div>
+	</div>
+</div>
+
 <div style="position:absolute;bottom:10px">
 <span><a href="table-1.html">table 1</a></span>
 <span><a href="table-2.html">table 2</a></span>
@@ -44,4 +69,5 @@
 <span><a href="table-9.html">table 9</a></span>
 <span><a href="table-10.html">table 10</a></span>
 </div>
+
 </body></html>
