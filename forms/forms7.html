@@ -1,0 +1,46 @@
+<html lang="en-us"><head><title>Form Demo</title>
+<style>
+ul {
+    list-style-type:none;
+}
+li
+{
+    display: inline-block;
+}
+</style>
+<script>
+function updateName () {
+	var fname = document.getElementById('fname');
+	var lname = document.getElementById('lname');
+	var fnameValue = fname.value;
+	var lnameValue = lname.value;
+	var name = document.getElementById('name');
+	name.value = fname.value+' '+lname.value;
+}
+</script>
+</head><body>
+<h1>Form Demo 7: Text Inputs Only Visible Labels</h1>
+<form>
+<label>First Name</label>
+<input type="text" id="fname" aria-required="true" onChange="updateName()"/>
+<br/>
+<label>Last Name</label>
+<input type="text" id="lname" aria-required="true" onChange="updateName()"/>
+<br/>
+</form>
+<br/>
+<ul role="menubar" style="position:absolute;bottom:10px">
+	<li role="none"><a role="menuitem" href="forms1.html">Form 1</a></li>
+	<li role="none"><a role="menuitem" href="forms2.html">Form 2</a></li>
+	<li role="none"><a role="menuitem" href="forms3.html">Form 3</a></li>
+	<li role="none"><a role="menuitem" href="forms4.html">Form 4</a></li>
+	<li role="none"><a role="menuitem" href="forms5.html">Form 5</a></li>
+	<li role="none"><a role="menuitem" href="forms6.html">Form 6</a></li>
+	<li role="none"><a role="menuitem" style="font-weight: bolder;border: 3px solid black;background-color: black;color: white;" href="forms7.html">Form 7</a></span>
+	<li role="none"><a role="menuitem" href="forms8.html">Form 8</a></li>
+	<li role="none"><a role="menuitem" href="forms9.html">Form 9</a></li>
+	<li role="none"><a role="menuitem" href="forms10.html">Form 10</a></li>
+	<li role="none"><a role="menuitem" href="forms11.html">Form 11</a></li>
+	
+</ul>
+<body></table>
