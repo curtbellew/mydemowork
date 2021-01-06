@@ -1,5 +1,20 @@
 <html lang="en-us"><head><title>Form Demo</title>
 <style>
+.mask {
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    opacity: 0.5;
+
+    filter: blur(10px);
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='svgMask'><feGaussianBlur stdDeviation='10' /></filter></svg>#svgMask");
+}
 ul {
     list-style-type:none;
 }
@@ -9,16 +24,37 @@ li
 }
 </style>
 </head><body>
-<h1>Form Demo 1: Text Inputs</h1>
-<form>
-<label for="fname">First Name</label>
-<input type="text" id="fname" autocomplete="given-name"/>
-</br>
-<label for="lname">Last Name</label>
-<input type="text" id="lname"/>
-<label for="finp">File
-<input type="file"/></label>
-</form>
+<h1>Form Demo 1: Text Inputs Blank Labels</h1>
+<div>
+	<label class="mask" for="firstname">First Name</label><br>
+	<input autocomplete="given-name" name="firstname" id="firstname" type="text">
+</div>
+<div>
+	<label class="mask" for="lastname">Last Name</label><br>
+	<input autocomplete="family-name" name="lastname" id="lastname" type="text">
+</div>
+<div>
+	<label class="mask" for="address1">Address 1</label><br>
+	<input autocomplete="address-line1" name="address1" id="address1" type="text">
+</div>
+<div>
+	<label class="mask" for="address2">Address 2</label><br>
+	<input autocomplete="address-line2" name="address2" id="address2" type="text">
+</div>
+<div>
+	<label class="mask" for="city">City</label><br>
+	<input autocomplete="address-level2" name="city" id="city" type="text">
+</div>
+<div>
+	<label class="mask" for="state">State</label><br>
+	<input autocomplete="address-level1" name="state" id="state" type="text">
+</div>
+<div>
+	<label class="mask" for="shipping_zip">ZIP Code</label><br>
+	<input autocomplete="postal-code" name="shipping_zip" id="shipping_zip" type="text">
+</div>
+<p/>
+<input class="mask" type="submit" value="Submit"></input><input class="mask" type="button" value="Cancel"></input>
 <ul role="menubar" style="position:absolute;bottom:10px">
 	<li role="none"><a role="menuitem" style="font-weight: bolder;border: 3px solid black;background-color: black;color: white;" href="forms1.html">Form 1</a></span>
 	<li role="none"><a role="menuitem" href="forms2.html">Form 2</a></li>

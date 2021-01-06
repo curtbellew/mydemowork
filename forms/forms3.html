@@ -1,5 +1,20 @@
 <html lang="en-us"><head><title>Form Demo</title>
 <style>
+.mask {
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    opacity: 0.5;
+
+    filter: blur(10px);
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='svgMask'><feGaussianBlur stdDeviation='10' /></filter></svg>#svgMask");
+}
 ul {
     list-style-type:none;
 }
@@ -9,30 +24,12 @@ li
 }
 </style>
 </head><body>
-<h1>Form Demo 3: Fieldset Text Inputs</h1>
-<fieldset style="float: left;">
-	<legend>Shipping Address:</legend>
-	<div>
-		<label for="shipping_name"><span class="visuallyhidden">Shipping </span>Name:</label><br>
-		<input name="shipping_name" id="shipping_name" type="text">
-	</div>
-	<div>
-		<label for="shipping_street">Street:</label><br>
-		<input name="shipping_street" id="shipping_street" type="text">
-	</div>
-	<div>
-		<label for="shipping_number">Number:</label><br>
-		<input name="shipping_number" id="shipping_number" type="text">
-	</div>
-	<div>
-		<label for="shipping_city">City:</label><br>
-		<input name="shipping_city" id="shipping_city" type="text">
-	</div>
-	<div>
-		<label for="shipping_zip">ZIP code:</label><br>
-		<input name="shipping_zip" id="shipping_zip" type="text">
-		</div>
-</fieldset>
+<h1>Form Demo 3: Checkbox Blank Label</h1>
+<form>
+	<label class="mask" for="vehicle1"> I have a bike</label>
+	<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+</form>
+
 </br>
 <ul role="menubar" style="position:absolute;bottom:10px">
 	<li role="none"><a role="menuitem" href="forms1.html">Form 1</a></li>

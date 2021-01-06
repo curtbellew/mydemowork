@@ -19,15 +19,25 @@ function updateName () {
 }
 </script>
 </head><body>
-<h1>Form Demo 7: Text Inputs Only Visible Labels</h1>
-<form>
-<label>First Name</label>
-<input type="text" id="fname" aria-required="true" onChange="updateName()"/>
-<br/>
-<label>Last Name</label>
-<input type="text" id="lname" aria-required="true" onChange="updateName()"/>
-<br/>
-</form>
+<h1>Form Demo 7: Radios</h1>
+<fieldset style="float: left;">
+	<legend>Least favorite Duck:</legend>
+	<div>
+	  <input type="radio" id="huey" name="drone" value="huey"
+	         checked>
+	  <label for="huey">Huey</label>
+	</div>
+
+	<div>
+	  <input type="radio" id="dewey" name="drone" value="dewey">
+	  <label for="dewey">Dewey</label>
+	</div>
+
+	<div>
+	  <input type="radio" id="louie" name="drone" value="louie">
+	  <label for="louie">Louie</label>
+	</div>
+</fieldset>
 <br/>
 <ul role="menubar" style="position:absolute;bottom:10px">
 	<li role="none"><a role="menuitem" href="forms1.html">Form 1</a></li>

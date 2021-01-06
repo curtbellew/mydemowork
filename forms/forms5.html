@@ -1,5 +1,20 @@
 <html lang="en-us"><head><title>Form Demo</title>
 <style>
+.mask {
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    opacity: 0.5;
+
+    filter: blur(10px);
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='svgMask'><feGaussianBlur stdDeviation='10' /></filter></svg>#svgMask");
+}
 ul {
     list-style-type:none;
 }
@@ -9,20 +24,27 @@ li
 }
 </style>
 </head><body>
-<h1>Form Demo 5: ARIA Button</h1>
-<form>
-<a style="font-size: 15px;
-border: 1px solid #ADADAD;
-padding-top: 2px;
-padding-bottom: 2px;
-padding-left: 7px;
-padding-right: 7px;
-background-color: #E1E1E1;
-text-decoration: none;
-color: black;
-font-weight: normal;
-font-family: sans-serif;" href="javascript:;" role="button" style="font-size:15px;border: 1px solid black;">Button</a>
-</br>
+<h1>Form Demo 5: Radio Blank Labels</h1>
+<fieldset style="float: left;">
+	<legend class="mask">Least favorite Duck:</legend>
+	<div>
+	  <input type="radio" id="huey" name="drone" value="huey"
+	         checked>
+	  <label class="mask" for="huey">Huey</label>
+	</div>
+
+	<div>
+	  <input type="radio" id="dewey" name="drone" value="dewey">
+	  <label class="mask" for="dewey">Dewey</label>
+	</div>
+
+	<div>
+	  <input type="radio" id="louie" name="drone" value="louie">
+	  <label class="mask" for="louie">Louie</label>
+	</div>
+</fieldset>
+
+<br/>
 <ul role="menubar" style="position:absolute;bottom:10px">
 	<li role="none"><a role="menuitem" href="forms1.html">Form 1</a></li>
 	<li role="none"><a role="menuitem" href="forms2.html">Form 2</a></li>

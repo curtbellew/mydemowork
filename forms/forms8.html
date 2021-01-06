@@ -19,16 +19,46 @@ function updateName () {
 }
 </script>
 </head><body>
-<h1>Form Demo 8: Text Inputs</h1>
+<h1>Form Demo 8: Various Inputs</h1>
 <form>
-<label for="fname">First Name</label>
-<input type="text" id="fname" aria-required="true" onChange="updateName()"/>
-<br/>
-<label for="lname">Last Name</label>
-<input type="text" id="lname" aria-required="true" onChange="updateName()"/>
-<br/>
-<label for="name">Name</label>
-<input readonly type="text" id="name"/>
+	<label for="cars">Choose a car</label>
+	<select name="cars" id="cars">
+  		<option value="volvo">Volvo</option>
+  		<option value="saab">Saab</option>
+  		<option value="mercedes">Mercedes</option>
+  		<option value="audi">Audi</option>
+	</select>
+<p/>
+
+	<label for="tarea">The Corporate Accessibility Mandate</label><br/>
+	<textarea id="tarea" name="tarea" rows="4" cols="50">All products, services and websites, including documentation, that Oracle provides to customers must address accessibility, by following the Oracle Accessibility Guidelines.</textarea>
+<p/>
+	
+	<input type="button" value="Add"><p/>
+	
+	<label for="chck">Checkbox Label</label>
+	<input id="chck" type="checkbox"><p/>
+	
+	<label for="fi">File Label</label>
+	<input id="fi" type="file"><p/>
+
+	<label for="num">Spin Button Label</label>
+	<input id="num" type="number"><p/>
+
+	<label for="pas">Password Label</label>
+	<input id="pas" type="password"><p/>
+
+	<label for="rad">Radio Label</label>
+	<input id="rad" type="radio"><p/>
+
+	<label for="ra">Range Label</label>
+	<input id="ra" type="range"><p/>
+
+	<input type="reset"><p/>
+
+	<label for="se">Search Label</label>
+	<input id="se"type="search"><p/>
+
 </form>
 <br/>
 <ul role="menubar" style="position:absolute;bottom:10px">
