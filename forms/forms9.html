@@ -1,4 +1,4 @@
-<html lang="en-us"><head><title>Form Demo</title>
+<html lang="en-us"><head><title>Form Demo 9</title>
 <style>
 .mask {
     left: 0;
@@ -24,28 +24,32 @@ li
 }
 </style>
 </head><body>
-<h1>Form Demo 9: Text Inputs</h1>
+<h1>Form Demo 9: Text Inputs : Check the Labels!</h1>
 <h2>Fill out this very important form!</h2>
 
-	<div>
-		<label class="mask" for="shipping_name"><span class="visuallyhidden">Shipping </span>Name:</label><br>
-		<input name="shipping_name" id="shipping_name" type="text">
+	<div id="per">
+		<label for="shipping_name">Name</label><br>
+		<input autocomplete="name" name="shipping_name" id="shipping_name" type="text">
+	</div>
+	<div id="per">
+		<label for="shipping_street1">Address 1</label><br>
+		<input autocomplete="address-line1" name="shipping_street1" id="shipping_street1" type="text">
 	</div>
 	<div>
-		<label class="mask" for="shipping_street">Street:</label><br>
-		<input name="shipping_street" id="shipping_street" type="text">
+		<label for="shipping_street2">Address 2</label><br>
+		<input autocomplete="address-line1" name="shipping_street2" id="shipping_street1" type="text">
 	</div>
 	<div>
-		<label class="mask" for="shipping_number">Number:</label><br>
-		<input name="shipping_number" id="shipping_number" type="text">
+		<label for="city">City</label><br>
+		<input autocomplete="address-level2" id="city" type="text">
 	</div>
 	<div>
-		<label class="mask" for="shipping_city">City:</label><br>
-		<input name="shipping_city" id="shipping_city" type="text">
+		<label for="state">State</label><br>
+		<input autocomplete="address-level1" id="state" type="text">
 	</div>
 	<div>
-		<label class="mask" for="shipping_zip">ZIP code:</label><br>
-		<input name="shipping_zip" id="shipping_zip" type="text">
+		<label for="shipping_zip">ZIP Code</label><br>
+		<input autocomplete="postal-code" name="shipping_zip" id="shipping_zip" type="text">
 		</div>
 </br>
 <nav>

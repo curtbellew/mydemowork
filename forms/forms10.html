@@ -1,4 +1,4 @@
-<html lang="en-us"><head><title>Form Demo</title>
+<html lang="en-us"><head><title>Form Demo 10</title>
 <style>
 .mask {
     left: 0;
@@ -24,26 +24,32 @@ li
 }
 </style>
 </head><body>
-<h1>Form Demo 10: Fieldset Radion Buttons</h1>
+<h1>Form Demo 10: Text Inputs: Check the Labels and Input Purposes!</h1>
 <h2>Fill out this very important form!</h2>
-<fieldset style="float: left;">
-	<legend class="mask">Least favorite Duck:</legend>
-	<div>
-	  <input type="radio" id="huey" name="drone" value="huey"
-	         checked>
-	  <label for="huey">Huey</label>
+	<div id="per">
+		<label for="shipping_name">Name</label><br>
+		<input autocomplete="first-name" name="shipping_name" id="shipping_name" type="text">
 	</div>
-
-	<div>
-	  <input type="radio" id="dewey" name="drone" value="dewey">
-	  <label for="dewey">Dewey</label>
+	<div id="per">
+		<label for="shipping_street1">Address 1</label><br>
+		<input autocomplete="address-line1" name="shipping_street1" id="shipping_street1" type="text" role="combobox">
 	</div>
-
 	<div>
-	  <input type="radio" id="louie" name="drone" value="louie">
-	  <label for="louie">Louie</label>
+		<label for="shipping_street2">Address 2</label><br>
+		<input autocomplete="address-line1" name="shipping_street2" id="shipping_street1" type="text">
 	</div>
-</fieldset>
+	<div>
+		<label for="city">City</label><br>
+		<input autocomplete="address-level2" id="city" type="text">
+	</div>
+	<div>
+		<label for="state">State</label><br>
+		<input autocomplete="address-level1" id="state" type="text">
+	</div>
+	<div>
+		<label for="shipping_zip">ZIP Code</label><br>
+		<input autocomplete="postal-code" name="shipping_zip" id="shipping_zip" type="text">
+		</div>
 </br>
 <ul role="menubar" style="position:absolute;bottom:10px">
 	<li role="none"><a role="menuitem" href="forms1.html">Form 1</a></li>
