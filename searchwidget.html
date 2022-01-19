@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.btn {
+  background-color: #2196F3;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+}
+
+.dropdown {
+  position: absolute;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  z-index: 1;
+}
+.dropdown-content > ul {
+  list-style-position: outside;
+  list-style-type: none;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd}
+.focused {background-color: #ddd}
+
+/*.dropdown:hover .dropdown-content, .dropdown:focus .dropdown-content {*/
+.dropdownDisplay {
+  display: block;
+}
+
+.btn:hover, .dropdown:hover, .btn:focus, .dropdown:focus .btn {
+  background-color: #0b7dda;
+}
+
+</style>
+</head>
+<body>
+
+<div id="textbox"></div>
+<button class="btn" id="but">Button</button>
+<div class="dropdown">
+  <button role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="listboxcontent" aria-autocomplete="list" 
+		class="btn" style="border-left:1px solid #0d8bf2" id="combo">
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div role="listbox" id="listboxcontent" class="dropdown-content" aria-label="Chooser">
+	  <ul role="none" id="dropdown-content">
+		<li role="option" id="option0"><a href="#" tabindex="-1">Link 1</a></li>
+		<li role="option" id="option1"><a href="#" tabindex="-1">Link 2</a></li>
+		<li role="option" id="option2"><a href="#" tabindex="-1">Link 3</a></li>
+	  </ul>
+  </div>
+</div>
+<script>
+	var combo = document.getElementById("combo");
+	var button = document.getElementById("but");
+	var textbox = document.getElementById("textbox");
+	var listbox =     document.getElementById("listboxcontent");
+	var listboxItems = listbox.querySelectorAll("li");
+	var arrowSelected;
+	var listboxOpen = false;
+	let close = function(keep){
+		if (keep && arrowSelected) { setValue(arrowSelected); }
+		unSelectAll();
+		listbox.style.display = "none";
+		listboxOpen = false;
+		combo.setAttribute("aria-expanded",false);
+	}
+	let setValue = function(event){
+		if (arrowSelected) {
+			textbox.innerHTML = arrowSelected.innerText;
+		} else {
+			console.log('no selection');
+		}
+	}
+	let openOrClose = function (event) {
+		if (listboxOpen) {
+			close(true);
+		} else {
+			listbox.style.display = "block";
+			listboxOpen = true;
+			combo.setAttribute("aria-expanded",true);
+		}
+	}
+	let currentSelection = function(list) {
+		let selectedItem = listbox.querySelector(".focused");
+		return selectedItem;
+	}
+	combo.addEventListener("click", openOrClose, false);
+	combo.onkeydown = function (e) {
+		var keyCode = e.keyCode;
+		if(keyCode == 13) {
+			openOrClose(e);
+		} else if (keyCode == 40) {
+			moveDown(e)
+		} else if  (keyCode == 38) {
+			moveUp(e);
+		} else if  (keyCode == 27) {
+			close(false);
+		} 
+	};
+	let moveDown = function (event){
+		if (!listboxOpen) {
+			listbox.style.display = "block";
+			listboxOpen = true;
+		} 
+		let curSel = currentSelection(listbox);
+		if (!curSel){
+			setSelected(listboxItems[0]);
+			arrowSelected = listboxItems[0];
+		} else {
+			let curSelIndex = Array.from(listboxItems).indexOf(curSel);
+			if (curSelIndex < (listboxItems.length-1)){
+				setUnSelected(Array.from(listboxItems)[curSelIndex]);
+				setSelected(Array.from(listboxItems)[curSelIndex+1]);
+				arrowSelected = Array.from(listboxItems)[curSelIndex+1];
+			}
+		}
+	}
+	let moveUp = function (event){
+		if (listboxOpen) {
+			let curSel = currentSelection(listbox);
+			let curSelIndex = Array.from(listboxItems).indexOf(curSel);
+			if (curSelIndex && curSelIndex !== 0){
+				let curSel = currentSelection(listbox);
+				let curSelIndex = Array.from(listboxItems).indexOf(curSel);
+				setUnSelected(Array.from(listboxItems)[curSelIndex]);
+				setSelected(Array.from(listboxItems)[curSelIndex-1]);
+				arrowSelected = Array.from(listboxItems)[curSelIndex-1];
+			}
+		}
+	}
+	let setSelected = function(listItem){
+		if (listItem && listItem.classList){
+			listItem.classList.add("focused");
+			listItem.setAttribute("aria-selected",true);
+			combo.setAttribute("aria-activedescendant",listItem.id);
+
+		}
+	}
+	let setUnSelected = function(listItem){
+		if (listItem && listItem.classList){
+			listItem.classList.remove("focused");
+			listItem.setAttribute("aria-selected",false);
+		}
+	}
+	let unSelectAll = function() {
+		listboxItems.forEach((listItem) => {
+			listItem.classList.remove("focused");
+			listItem.setAttribute("aria-selected",false);
+		});
+	}
+</script>
+</body>
+</html>
