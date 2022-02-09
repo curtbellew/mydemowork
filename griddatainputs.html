@@ -1,0 +1,231 @@
+<html><head><title>Grid with keyboard navigation</title>
+<script>
+let keyboardhandler = function (event, table, row, rowCount, columnCount) {
+	let currentTarget = event.currentTarget;
+	let ariaRowindex = row.getAttribute('aria-rowindex');
+	let ariaColindex = currentTarget.getAttribute('aria-colindex');
+	//let rows = 
+	if (event.keyCode == 40) {
+		//console.log('down');
+		if (Number(ariaRowindex)+1 < 21) {
+			let downRow = table.querySelector('[aria-rowindex = "'+(Number(ariaRowindex)+1)+'"]');
+			let downCell = downRow.querySelector('[aria-colindex = "'+ariaColindex+'"]');
+			downCell.setAttribute('tabindex', 0);
+			downCell.focus();
+			downCell.scrollIntoView(true); // Top
+			currentTarget.setAttribute('tabindex', -1);
+		}
+	} else if (event.keyCode == 38) {
+		if ((Number(ariaRowindex)-1) > 0) {
+			let upRow = table.querySelector('[aria-rowindex = "'+(Number(ariaRowindex)-1)+'"]');
+			let upCell = upRow.querySelector('[aria-colindex = "'+(Number(ariaColindex))+'"]');
+			upCell.setAttribute('tabindex', 0);
+			upCell.focus();
+			upCell.scrollIntoView(true); // Top
+			currentTarget.setAttribute('tabindex', -1);
+		}
+		//console.log('up');
+	} else if (event.keyCode == 39) {
+		if (Number(ariaColindex)+1 < columnCount) {
+			let nextCell = row.querySelector('[aria-colindex = "'+(Number(ariaColindex)+1)+'"]');
+			nextCell.setAttribute('tabindex', 0);
+			nextCell.focus();
+			currentTarget.setAttribute('tabindex', -1);
+		}
+		//console.log('right');
+	} else if (event.keyCode == 37) {
+		if (Number(ariaColindex)-1 > -1) {
+			let prevCell = row.querySelector('[aria-colindex = "'+(Number(ariaColindex)-1)+'"]');
+			prevCell.setAttribute('tabindex', 0);
+			prevCell.focus();
+			currentTarget.setAttribute('tabindex', -1);
+		}
+		//console.log('left');
+	}
+}
+window.onload = function()  {
+	let table = document.querySelector('table, [role="grid"]');
+	let rows = table.querySelectorAll('tr, [role="row"]');
+	rows.forEach(row => {
+		let ariaColindex = 0;
+		let columns = row.querySelectorAll('th, [role="columheader"], [role="rowheader"], td, [role="gridcell"]');
+		columns.forEach(th => {
+			row.setAttribute('aria-rowindex', row.rowIndex+1);
+			th.setAttribute('aria-colindex', ariaColindex++);
+			th.addEventListener('keyup', event => {
+				keyboardhandler(event, table, row, rows.length, columns.length);
+			});
+		});
+	});
+}
+</script>
+<style>
+th[role=rowheader] {
+  font-weight: normal;
+  text-align: start;
+}
+</style>
+</head><body>
+<h1 id="demo2label1">Student grades</h1>
+
+<table role="grid" aria-rowcount="20" tabindex="-1" id="table1" aria-labelledby="demo2label1" border="1">
+    <tr>
+        <th tabindex="0" role="columnheader">Student Name</th>
+        <th tabindex="-1" role="columnheader" id="bio">Biology</th>
+        <th tabindex="-1" role="columnheader" id="chem">Chemistry</th>
+        <th tabindex="-1" role="columnheader">Physics</th>
+        <th tabindex="-1" role="columnheader">History</th>
+    </tr>
+    <tr>
+        <th tabindex="-1" role="rowheader" id="r1">John Doe</th>
+        <td tabindex="-1" role="gridcell"><input aria-labelledby="bio r1" type="text" value="A" readonly="true" tabindex="-1"></input></td>
+        <td tabindex="-1" role="gridcell"><input aria-labelledby="chem r1" type="text" value="A+" tabindex="-1"></input></td>
+        <td tabindex="-1" role="gridcell">B</td>
+        <td tabindex="-1" role="gridcell">B</td>
+    </tr>
+    <tr>
+		<th tabindex="-1" role="rowheader" id="r2">Miriam Luther</th>
+		<td tabindex="-1" role="gridcell"><textarea aria-labelledby="bio r2" value="A" readonly="true" tabindex="-1">A</textarea></td>
+		<td tabindex="-1" role="gridcell"><textarea aria-labelledby="chem r2" value="A" tabindex="-1">A</textarea></td>
+		<td tabindex="-1" role="gridcell">C</td>
+		<td tabindex="-1" role="gridcell">B</td>
+    </tr>
+	<tr>
+        <th tabindex="-1" role="rowheader" id="r4">Jill</th>
+        <td tabindex="-1" role="gridcell">A</td>
+        <td tabindex="-1" role="gridcell">A+</td>
+        <td tabindex="-1" role="gridcell">B</td>
+        <td tabindex="-1" role="gridcell">B</td>
+    </tr>
+    <tr>
+		<th tabindex="-1" role="rowheader" id="r5">Joe</th>
+		<td tabindex="-1" role="gridcell">A</td>
+		<td tabindex="-1" role="gridcell">A</td>
+		<td tabindex="-1" role="gridcell">C</td>
+		<td tabindex="-1" role="gridcell">B</td>
+    </tr>
+    <tr>
+		<th tabindex="-1" role="rowheader" id="r6">Sarah</th>
+		<td tabindex="-1" role="gridcell">A</td>
+		<td tabindex="-1" role="gridcell">A</td>
+		<td tabindex="-1" role="gridcell">C</td>
+		<td tabindex="-1" role="gridcell">B</td>
+    </tr>
+	<tr>
+        <th tabindex="-1" role="rowheader" id="r7">Nathan</th>
+        <td tabindex="-1" role="gridcell">A</td>
+        <td tabindex="-1" role="gridcell">A+</td>
+        <td tabindex="-1" role="gridcell">B</td>
+        <td tabindex="-1" role="gridcell">B</td>
+    </tr>
+    <tr>
+		<th tabindex="-1" role="rowheader" id="r8">Nick</th>
+		<td tabindex="-1" role="gridcell">A</td>
+		<td tabindex="-1" role="gridcell">A</td>
+		<td tabindex="-1" role="gridcell">C</td>
+		<td tabindex="-1" role="gridcell">B</td>
+    </tr>
+    <tr>
+		<th tabindex="-1" role="rowheader" id="r9">Keren</th>
+		<td tabindex="-1" role="gridcell">A</td>
+		<td tabindex="-1" role="gridcell">A</td>
+		<td tabindex="-1" role="gridcell">C</td>
+		<td tabindex="-1" role="gridcell">B</td>
+    </tr>
+	<tr>
+        <th tabindex="-1" role="rowheader" id="r10">Theresa</th>
+        <td tabindex="-1" role="gridcell">A</td>
+        <td tabindex="-1" role="gridcell">A+</td>
+        <td tabindex="-1" role="gridcell">B</td>
+        <td tabindex="-1" role="gridcell">B</td>
+    </tr>
+    <tr>
+		<th tabindex="-1" role="rowheader" id="r11">Gabby</th>
+		<td tabindex="-1" role="gridcell">A</td>
+		<td tabindex="-1" role="gridcell">A</td>
+		<td tabindex="-1" role="gridcell">C</td>
+		<td tabindex="-1" role="gridcell">B</td>
+    </tr>
+    <tr>
+		<th tabindex="-1" role="rowheader" id="r12">Hunter</th>
+		<td tabindex="-1" role="gridcell">A</td>
+		<td tabindex="-1" role="gridcell">A</td>
+		<td tabindex="-1" role="gridcell">C</td>
+		<td tabindex="-1" role="gridcell">B</td>
+    </tr>
+</table>
+<h3>readonly</h3>
+<input type="text" aria-label="Label" value="value" readonly id="inp1"></input>
+<br/>
+<input type="text" aria-labelledby="inp1" tabindex="0" readonly></input>
+<p/>
+<h3>editable</h3>
+<input type="text" aria-label="Label" value="value" id="inp2"></input>
+<br/>
+<input type="text" aria-labelledby="inp2" tabindex="0"></input>
+<br/>
+<div tabindex="0">
+<input tabindex="-1" type="text" aria-label="level" value="500"></input>
+</div>
+<div role="grid">
+<div role="row">
+<div role="gridcell" class="oj-listview-cell-element" tabindex="0">
+<oj-list-item-layout class="oj-complete">
+   <div class="oj-listitemlayout-grid">
+      <div class="oj-listitemlayout-textslots">
+         <div tabindex="-1" data-oj-tabmod="0">
+            <oj-select-single readonly="[[isReadOnly]]" label-edge="[[labelEdgeValue]]" id="ss1" value="Select Single Read Out" label-hint="[[labelHint]]" data="[[sampleData]]" class="oj-text-field oj-complete oj-searchselect oj-form-control oj-component oj-read-only" aria-label="Label Hint Read Out">
+               <div id="oj-listbox-live-ss1" class="oj-helper-hidden-accessible oj-listbox-liveregion" aria-live="polite"></div>
+               <div class="oj-text-field-container oj-searchselect-main-field oj-text-field-has-end-slot" role="presentation">
+                  <div class="oj-text-field-middle">
+                     <div class="oj-text-field-readonly-div">
+                        <div class="oj-text-field-readonly" role="textbox" aria-readonly="true" tabindex="-1" aria-labelledby="ss1-labelled-by|label" aria-label="Label Hint Read Out">Select Single Read Out</div>
+                     </div>
+                     <input style="display:none" id="ss1|input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="oj-searchselect-input oj-text-field-input" aria-autocomplete="list" placeholder="" readonly="true" type="text" tabindex="-1" aria-label="Label Hint Read Out">
+                  </div>
+                  <span class="oj-text-field-end"><a class="oj-searchselect-arrow oj-searchselect-open-icon oj-searchselect-icon oj-component-icon oj-clickable-icon-nocontext" role="presentation"></a></span>
+               </div>
+               <!--oj-input-text display-options.messages="none" user-assistance-density="compact" id="oj-searchselect-filter-ss1" class="oj-searchselect-filter oj-inputtext oj-form-control oj-component oj-text-field oj-has-no-value oj-complete" clear-icon="never" autocomplete="off" aria-autocomplete="list" data-oj-internal="" data-oj-context="" data-oj-binding-provider="none" virtual-keyboard="search" style="visibility: hidden;" labelled-by="">
+                  <div role="presentation" class="oj-text-field-container oj-text-field-has-end-slot">
+                     <div class="oj-text-field-middle">
+						<input data-oj-internal="" aria-label="Label Hint Read Out" autocomplete="off" type="text" class="oj-inputtext-input oj-text-field-input oj-component-initnode" placeholder="" id="oj-searchselect-filter-ss1|input" data-oj-tabmod="NaN" tabindex="-1">
+					</div>
+                     <span class="oj-text-field-end">
+						<a class="oj-searchselect-arrow oj-searchselect-open-icon oj-searchselect-icon oj-component-icon oj-clickable-icon-nocontext" slot="end"></a>
+					</span>
+                  </div>
+               </oj-input-text-->
+               <input data-oj-internal="" type="text" class="oj-component-initnode" style="display: none;" data-oj-tabmod="NaN" tabindex="-1" disabled="" aria-hidden="true">
+               <div class="oj-user-assistance-inline-container oj-reflow" id="ui-id-31"></div>
+            <!--/oj-select-single-->
+         </div>
+      </div>
+   </div>
+</oj-list-item-layout></div>
+<div role="gridcell" class="oj-listview-cell-element" tabindex="0">
+   <oj-list-item-layout class="oj-complete">
+      <div class="oj-listitemlayout-grid">
+         <div class="oj-listitemlayout-textslots">
+            <div tabindex="-1" data-oj-tabmod="0">
+               <oj-input-number readonly="[[isReadOnly]]" label-edge="[[labelEdgeValue]]" id="number" value="500" label-hint="[[labelHint]]" class="oj-inputnumber oj-component oj-form-control oj-text-field oj-complete oj-read-only">
+                  <div class="oj-text-field-container" role="presentation">
+                     <span class="oj-inputnumber-wrapper">
+                        <div class="oj-text-field-middle">
+                           <div class="oj-text-field-readonly-div">
+                              <div class="oj-text-field-readonly" role="textbox" aria-readonly="true" tabindex="-1" aria-labelledby="number-labelled-by|label" aria-label="Label Hint Read Out">500</div>
+                           </div>
+                           <input data-oj-internal="" class="oj-inputnumber-input oj-text-field-input oj-component-initnode" type="text" placeholder="" aria-valuenow="500" id="number|input" data-oj-tabmod="NaN" tabindex="-1" readonly="" aria-label="Label Hint Read Out">
+                        </div>
+                     </span>
+                  </div>
+                  <div class="oj-user-assistance-inline-container oj-reflow" id="ui-id-28"></div>
+               </oj-input-number>
+            </div>
+         </div>
+      </div>
+   </oj-list-item-layout>
+</div>
+</div>
+</div>
+</body>
+</html>
