@@ -1,0 +1,130 @@
+<html><head></head><body>
+
+<title>combobox demo</title>
+<style>
+.focused {
+	background-color: #B4FCC6;
+}
+.listDropDown {
+	style:border 1px solid black;
+}
+</style>
+
+<label for="combo" id="lab1">Animal</label>
+<div role="combobox" id="combo" aria-labelledby="lab1" aria-haspopup="listbox" aria-expanded="true" aria-owns="popup_listbox" tabindex="0" aria-activedescendant="option2">
+<div role="textbox" aria-labelledby="lab1" aria-activedescendant="" aria-controls="popup_listbox" aria-autocomplete="list" type="text" id="textbox" style="width: 150px;height: 20px;border: 1px solid black;">
+</div>
+</div>
+<div style="position:relative">
+<ul style="position: absolute; background-color: white; display: block; top: -16px; border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid; list-style: outside none none; padding-left: 5px; width: 145px;" role="listbox" id="popup_listbox" class="listDropDown" aria-labelledby="lab1">
+   <li role="option" id="option0" class="" aria-selected="false">Aardvark</li>
+   <li role="option" id="option1" class="" aria-selected="false">Horse</li>
+   <li role="option" id="option2" class="focused" aria-selected="true">Zebra</li>
+</ul>
+</div>
+<label for="sel">Fish</label>
+<select id="sel"><option></option><option>Bluegill</option><option>Rainbow</option></select>
+<script>
+let combo = document.getElementById("combo");
+let textbox = document.getElementById("textbox");
+let listbox = document.getElementById("popup_listbox");
+let listboxItems = listbox.querySelectorAll("li");
+let arrowSelected;
+let listboxOpen = false;
+
+let openOrClose = function (event) {
+	if (listboxOpen) {
+		close(true);
+	} else {
+		listbox.style.display = "block";
+		listboxOpen = true;
+		combo.setAttribute("aria-expanded",true);
+	}
+}
+let close = function(keep){
+	if (keep && arrowSelected) { setValue(arrowSelected); }
+	unSelectAll();
+	listbox.style.display = "none";
+	listboxOpen = false;
+	combo.setAttribute("aria-expanded",false);
+}
+let setValue = function(event){
+	if (arrowSelected) {
+		textbox.innerHTML = arrowSelected.innerText;
+	} else {
+		console.log('no selection');
+	}
+}
+let moveDown = function (event){
+	if (!listboxOpen) {
+		listbox.style.display = "block";
+		listboxOpen = true;
+	} 
+	let curSel = currentSelection(listbox);
+	if (!curSel){
+		setSelected(listboxItems[0]);
+		arrowSelected = listboxItems[0];
+	} else {
+		let curSelIndex = Array.from(listboxItems).indexOf(curSel);
+		if (curSelIndex < (listboxItems.length-1)){
+			setUnSelected(Array.from(listboxItems)[curSelIndex]);
+			setSelected(Array.from(listboxItems)[curSelIndex+1]);
+			arrowSelected = Array.from(listboxItems)[curSelIndex+1];
+		}
+	}
+}
+let moveUp = function (event){
+	if (listboxOpen) {
+		let curSel = currentSelection(listbox);
+		let curSelIndex = Array.from(listboxItems).indexOf(curSel);
+		if (curSelIndex && curSelIndex !== 0){
+			let curSel = currentSelection(listbox);
+			let curSelIndex = Array.from(listboxItems).indexOf(curSel);
+			setUnSelected(Array.from(listboxItems)[curSelIndex]);
+			setSelected(Array.from(listboxItems)[curSelIndex-1]);
+			arrowSelected = Array.from(listboxItems)[curSelIndex-1];
+		}
+	}
+}
+let setSelected = function(listItem){
+	if (listItem && listItem.classList){
+		listItem.classList.add("focused");
+		listItem.setAttribute("aria-selected",true);
+		combo.setAttribute("aria-activedescendant",listItem.id);
+
+	}
+}
+let setUnSelected = function(listItem){
+	if (listItem && listItem.classList){
+		listItem.classList.remove("focused");
+		listItem.setAttribute("aria-selected",false);
+	}
+}
+let unSelectAll = function() {
+	listboxItems.forEach((listItem) => {
+		listItem.classList.remove("focused");
+		listItem.setAttribute("aria-selected",false);
+	});
+}
+let currentSelection = function(list) {
+	let selectedItem = listbox.querySelector(".focused");
+	return selectedItem;
+}
+combo.addEventListener("click", openOrClose, false);
+combo.onkeydown = function (e) {
+    var keyCode = e.keyCode;
+    if(keyCode == 13) {
+        openOrClose(e);
+    } else if (keyCode == 40) {
+		moveDown(e)
+	} else if  (keyCode == 38) {
+		moveUp(e);
+	} else if  (keyCode == 27) {
+		close(false);
+	} 
+};
+
+</script>
+
+
+</body></html>
