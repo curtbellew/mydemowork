@@ -23,8 +23,8 @@
           elem.classList.remove("current");
           next.classList.add("current");
           const container = lister.lastElementChild;
-          container.remove();          
-          if (!next.nextElementSibling) {
+          /*container.remove();          
+          if (next.nextElementSibling == null) {
             const count = container.childElementCount;
             for (let i=1; i<=5; i++) {
               const child = document.createElement("div");
@@ -34,7 +34,7 @@
               child.textContent = "Item "+(count+i);
               container.appendChild(child);
             }
-          }
+          }*/
           list.appendChild(container);
 //          setTimeout(() => {
             list.setAttribute("aria-activedescendant", next.id);
