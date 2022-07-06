@@ -24,7 +24,7 @@
           next.classList.add("current");
           const container = lister.lastElementChild;
           container.remove();          
-          if (next.nextElementSibling == null) {
+          if (!next.nextElementSibling) {
             const count = container.childElementCount;
             for (let i=1; i<=5; i++) {
               const child = document.createElement("div");
