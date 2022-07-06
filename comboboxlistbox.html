@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html id="htmldoc" lang="en-us">
+<head>
+    <style>
+      .current {
+        background-color: beige;
+      }
+    </style>
+    <script>
+      function handleKeydown(event) {
+        const list = document.getElementById("list");
+        const currentId = list.getAttribute("aria-activedescendant");
+        const elem = document.getElementById(currentId);
+        let next = elem;
+        if (event.key === 'ArrowDown') {
+          next = elem.nextElementSibling;
+        } else if (event.key === 'ArrowUp') {
+          next = elem.previousElementSibling;
+        }
+        if (next) {
+          list.setAttribute("aria-activedescendant", "item0");
+          elem.classList.remove("current");
+          next.classList.add("current");
+          const container = list.lastElementChild;
+          container.remove();          
+          if (next.nextElementSibling == null) {
+            const count = container.childElementCount;
+            for (let i=1; i<=5; i++) {
+              const child = document.createElement("div");
+              child.setAttribute("id", "item"+(count+i));
+              child.setAttribute("role", "option");
+              child.setAttribute("aria-selected", "false");
+              child.textContent = "Item "+(count+i);
+              container.appendChild(child);
+            }
+          }
+          list.appendChild(container);
+//          setTimeout(() => {
+            list.setAttribute("aria-activedescendant", next.id);
+//          }, 1000);
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <input type="text"></input>
+    <div id="list" role="listbox" tabindex="0" aria-activedescendant="item1" aria-multiselectable="true" onkeydown="handleKeydown(event)">
+      <div tabindex="-1" role="option" id="item0" style="display: none" aria-selected="false">Update</div>      
+      <div id="container" tabindex="-1"  role="presentation">
+        <div role="option" id="item1" class="current" aria-selected="false">Item 1</div>
+        <div role="option" id="item2" aria-selected="false" class="">Item 2</div>
+        <div role="option" id="item3" aria-selected="false" class="">Item 3</div>
+        <div role="option" id="item4" aria-selected="false" class="">Item 4</div>
+        <div role="option" id="item5" aria-selected="false" class="">Item 5</div>
+      </div>
+    </div>
+  </body>
+</html>
