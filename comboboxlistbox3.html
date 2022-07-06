@@ -9,6 +9,7 @@
     <script>
       function handleKeydown(event) {
         const list = document.getElementById("list");
+        const lister = document.getElementById("lister");
         const currentId = list.getAttribute("aria-activedescendant");
         const elem = document.getElementById(currentId);
         let next = elem;
@@ -21,7 +22,7 @@
           list.setAttribute("aria-activedescendant", "item0");
           elem.classList.remove("current");
           next.classList.add("current");
-          const container = list.lastElementChild;
+          const container = lister.lastElementChild;
           container.remove();          
           if (next.nextElementSibling == null) {
             const count = container.childElementCount;
@@ -44,7 +45,7 @@
   </head>
   <body>
     <input id="list" type="text" role="listbox" tabindex="0" aria-activedescendant="item1" aria-multiselectable="true" onkeydown="handleKeydown(event)"></input>
-    <div  >
+    <div id="lister" >
       <div tabindex="-1" role="option" id="item0" style="display: none" aria-selected="false">Update</div>      
       <div id="container" tabindex="-1"  role="presentation">
         <div role="option" id="item1" class="current" aria-selected="false">Item 1</div>
