@@ -1,0 +1,166 @@
+<html><head><title>Grid with keyboard navigation</title>
+<script>
+let keyboardhandler = function (event, table, row, rowCount, columnCount) {
+	let currentTarget = event.currentTarget;
+	let ariaRowindex = row.ariaRowIndex;
+	let ariaColindex = currentTarget.ariaColIndex;
+	//let rows = 
+	if (event.keyCode == 40) {
+		//console.log('down');
+		if (Number(ariaRowindex)+1 < 21) {
+		//if ((Number(aria-rowindex)+1) < rowCount) {
+			let downRow = table.querySelector('[aria-rowindex = "'+(Number(ariaRowindex)+1)+'"]');
+			let downCell = downRow.querySelector('[aria-colindex = "'+ariaColindex+'"]');
+			downCell.setAttribute('tabindex', 0);
+			downCell.focus();
+			downCell.scrollIntoView(true); // Top
+			currentTarget.setAttribute('tabindex', -1);
+		}
+	} else if (event.keyCode == 38) {
+		if ((Number(ariaRowindex)-1) > 0) {
+			let upRow = table.querySelector('[aria-rowindex = "'+(Number(ariaRowindex)-1)+'"]');
+			let upCell = upRow.querySelector('[aria-colindex = "'+(Number(ariaColindex))+'"]');
+			upCell.setAttribute('tabindex', 0);
+			upCell.focus();
+			upCell.scrollIntoView(true); // Top
+			currentTarget.setAttribute('tabindex', -1);
+		}
+		//console.log('up');
+	} else if (event.keyCode == 39) {
+		if (Number(ariaColindex)+1 < columnCount) {
+			let nextCell = row.querySelector('[aria-colindex = "'+(Number(ariaColindex)+1)+'"]');
+			nextCell.setAttribute('tabindex', 0);
+			nextCell.focus();
+			currentTarget.setAttribute('tabindex', -1);
+		}
+		//console.log('right');
+	} else if (event.keyCode == 37) {
+		if (Number(ariaColindex)-1 > -1) {
+			let prevCell = row.querySelector('[aria-colindex = "'+(Number(ariaColindex)-1)+'"]');
+			prevCell.setAttribute('tabindex', 0);
+			prevCell.focus();
+			currentTarget.setAttribute('tabindex', -1);
+		}
+		//console.log('left');
+	}
+}
+window.onload = function()  {
+	let table = document.querySelector('table, [role="grid"]');
+	let rows = table.querySelectorAll('tr, [role="row"]');
+	rows.forEach(row => {
+		let ariaColindex = 0;
+		let columns = row.querySelectorAll('th, [role="columheader"], [role="rowheader"], td, [role="gridcell"]');
+		columns.forEach(th => {
+			row.setAttribute('aria-rowindex', row.rowIndex+1);
+			th.setAttribute('aria-colindex', ariaColindex++);
+			th.addEventListener('keyup', event => {
+				keyboardhandler(event, table, row, rows.length, columns.length);
+			});
+		});
+	});
+}
+</script>
+<style>
+th[role=rowheader] {
+  font-weight: normal;
+  text-align: start;
+}
+</style>
+</head><body>
+<h1 id="demo2label1">Student grades</h1>
+
+<table role="application" tabindex="-1" id="table1" aria-labelledby="demo2label1" border="1">
+    <tr>
+        <th tabindex="0" >Student Name</th>
+        <th tabindex="-1" >Biology</th>
+        <th tabindex="-1" >Chemistry</th>
+        <th tabindex="-1" >Physics</th>
+        <th tabindex="-1" role="columnheader">History</th>
+    </tr>
+    <tr>
+        <th tabindex="-1" >John Doe</th>
+        <td tabindex="-1">A</td>
+        <td tabindex="-1" >A+</td>
+        <td tabindex="-1" >B</td>
+        <td tabindex="-1" >B</td>
+    </tr>
+    <tr>
+		<th tabindex="-1" >Miriam Luther</th>
+		<td tabindex="-1" >A</td>
+		<td tabindex="-1" >A</td>
+		<td tabindex="-1" >C</td>
+		<td tabindex="-1" >B</td>
+    </tr>
+    <tr>
+		<th tabindex="-1" role="rowheader">Arthur Long</th>
+		<td tabindex="-1" role="gridcell">A</td>
+		<td tabindex="-1" role="gridcell">A</td>
+		<td tabindex="-1" role="gridcell">C</td>
+		<td tabindex="-1" role="gridcell">B</td>
+    </tr>
+	<tr>
+        <th tabindex="-1" role="rowheader">Jill</th>
+        <td tabindex="-1" role="gridcell">A</td>
+        <td tabindex="-1" role="gridcell">A+</td>
+        <td tabindex="-1" role="gridcell">B</td>
+        <td tabindex="-1" role="gridcell">B</td>
+    </tr>
+    <tr>
+		<th tabindex="-1" role="rowheader">Joe</th>
+		<td tabindex="-1" role="gridcell">A</td>
+		<td tabindex="-1" role="gridcell">A</td>
+		<td tabindex="-1" role="gridcell">C</td>
+		<td tabindex="-1" role="gridcell">B</td>
+    </tr>
+    <tr>
+		<th tabindex="-1" role="rowheader">Sarah</th>
+		<td tabindex="-1" role="gridcell">A</td>
+		<td tabindex="-1" role="gridcell">A</td>
+		<td tabindex="-1" role="gridcell">C</td>
+		<td tabindex="-1" role="gridcell">B</td>
+    </tr>
+	<tr>
+        <th tabindex="-1" role="rowheader">Nathan</th>
+        <td tabindex="-1" role="gridcell">A</td>
+        <td tabindex="-1" role="gridcell">A+</td>
+        <td tabindex="-1" role="gridcell">B</td>
+        <td tabindex="-1" role="gridcell">B</td>
+    </tr>
+    <tr>
+		<th tabindex="-1" role="rowheader">Nick</th>
+		<td tabindex="-1" role="gridcell">A</td>
+		<td tabindex="-1" role="gridcell">A</td>
+		<td tabindex="-1" role="gridcell">C</td>
+		<td tabindex="-1" role="gridcell">B</td>
+    </tr>
+    <tr>
+		<th tabindex="-1" role="rowheader">Keren</th>
+		<td tabindex="-1" role="gridcell">A</td>
+		<td tabindex="-1" role="gridcell">A</td>
+		<td tabindex="-1" role="gridcell">C</td>
+		<td tabindex="-1" role="gridcell">B</td>
+    </tr>
+	<tr>
+        <th tabindex="-1" role="rowheader">Theresa</th>
+        <td tabindex="-1" role="gridcell">A</td>
+        <td tabindex="-1" role="gridcell">A+</td>
+        <td tabindex="-1" role="gridcell">B</td>
+        <td tabindex="-1" role="gridcell">B</td>
+    </tr>
+    <tr>
+		<th tabindex="-1" role="rowheader">Gabby</th>
+		<td tabindex="-1" role="gridcell">A</td>
+		<td tabindex="-1" role="gridcell">A</td>
+		<td tabindex="-1" role="gridcell">C</td>
+		<td tabindex="-1" role="gridcell">B</td>
+    </tr>
+    <tr>
+		<th tabindex="-1" role="rowheader">Hunter</th>
+		<td tabindex="-1" role="gridcell">A</td>
+		<td tabindex="-1" role="gridcell">A</td>
+		<td tabindex="-1" role="gridcell">C</td>
+		<td tabindex="-1" role="gridcell">B</td>
+    </tr>
+</table>
+</body>
+</html>
